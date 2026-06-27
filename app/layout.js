@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Zalando_Sans_Expanded } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 import NavBar from "@/components/navbar";
 
 const geistSans = Geist({
