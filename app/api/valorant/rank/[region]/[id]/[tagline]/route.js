@@ -52,10 +52,10 @@ export async function GET(req, { params }) {
   const summary = await getRank(region, id, tagline);
 
   const responseText = [
+    summary,
     "DEPRECATED API: This endpoint is no longer maintained.",
     "Please use the latest version at https://clemxnade.com/",
     "",
-    summary,
   ].join("\n");
 
   return new Response(responseText, {

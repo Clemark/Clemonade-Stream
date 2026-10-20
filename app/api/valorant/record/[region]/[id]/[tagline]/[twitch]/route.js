@@ -111,7 +111,7 @@ export async function GET(req, { params }) {
   // GET MATCH SUMMARY
   const summary = await getMatchSummary(region, id, tagline, cutoffUnix);
 
-  return new Response(`${deprecationNotice}${summary}`, {
+  return new Response(`${summary}${deprecationNotice}`, {
     headers: {
       "Content-Type": "text/plain",
     },
