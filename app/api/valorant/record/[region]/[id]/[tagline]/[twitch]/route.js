@@ -85,6 +85,12 @@ async function getMatchSummary(region, id, tagline, cutoffUnix) {
 export async function GET(req, { params }) {
   const { region, id, tagline, twitch } = await params;
 
+  const deprecationNotice = [
+    "DEPRECATED API: This endpoint is no longer maintained.",
+    "Please use the latest version at https://clemxnade.com/",
+    "",
+  ].join("\n");
+
   // FETCH TWITCH UPTIME
   const uptimeRes = await fetch(`https://decapi.me/twitch/uptime/${twitch}`);
 
@@ -92,7 +98,7 @@ export async function GET(req, { params }) {
 
   // HANDLING OFFLINE STREAM
   if (uptimeText.includes("offline")) {
-    return new Response(`${twitch} is currently offline.`, {
+    return new Response(`${deprecationNotice}${twitch} is currently offline.`, {
       headers: {
         "Content-Type": "text/plain",
       },
@@ -105,7 +111,7 @@ export async function GET(req, { params }) {
   // GET MATCH SUMMARY
   const summary = await getMatchSummary(region, id, tagline, cutoffUnix);
 
-  return new Response(summary, {
+  return new Response(`${deprecationNotice}${summary}`, {
     headers: {
       "Content-Type": "text/plain",
     },

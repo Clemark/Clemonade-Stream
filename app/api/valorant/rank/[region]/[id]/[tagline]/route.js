@@ -48,10 +48,17 @@ async function getRank(region, id, tagline) {
 export async function GET(req, { params }) {
   const { region, id, tagline } = await params;
 
-  // GET MATCH SUMMARY
+  // GET CURRENT RANK
   const summary = await getRank(region, id, tagline);
 
-  return new Response(summary, {
+  const responseText = [
+    "DEPRECATED API: This endpoint is no longer maintained.",
+    "Please use the latest version at https://clemxnade.com/",
+    "",
+    summary,
+  ].join("\n");
+
+  return new Response(responseText, {
     headers: {
       "Content-Type": "text/plain",
     },
